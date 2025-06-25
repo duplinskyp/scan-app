@@ -367,15 +367,38 @@ html {
   0%   { transform: translateY(10px); }
   100% { transform: translateY(0); }
 }
-
+@keyframes fadePulseOut {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  15% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  35% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+  75% {
+    opacity: 0.9;
+    transform: scale(1.01);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
 .scan-face {
   max-width: 90%;
   max-height: 90%;
-  width: auto;
-  height: auto;
-  opacity: 1; /* Defaultne viditeľné */
-  animation: faceReveal 1.5s ease-out; /* animuj, ale nezávisle od visibility */
+  object-fit: contain;
   filter: drop-shadow(0 0 20px #00ffccaa);
+  animation: fadePulseOut 3.5s ease-in-out forwards;
 }
 .close-btn {
   width: 100%;
