@@ -363,14 +363,19 @@ html {
   overflow: hidden;
 }
 
+@keyframes faceReveal {
+  0%   { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+
 .scan-face {
   max-width: 90%;
   max-height: 90%;
   width: auto;
   height: auto;
-  opacity: 1;
+  opacity: 1; /* Defaultne viditeľné */
+  animation: faceReveal 1.5s ease-out; /* animuj, ale nezávisle od visibility */
   filter: drop-shadow(0 0 20px #00ffccaa);
-  object-fit: contain;
 }
 .close-btn {
   width: 100%;
