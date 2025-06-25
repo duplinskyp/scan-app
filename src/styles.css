@@ -208,12 +208,12 @@ body, html {
 }
 .code-toggle-btn {
   position: absolute;
-  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0));
+  bottom: 6rem; /* rovnaké ako scan-btn */
   right: 1.5rem;
   font-size: 1.8rem;
   background: none;
   border: none;
   color: white;
-  z-index: 20;
+  z-index: 4;
   cursor: pointer;
 }
