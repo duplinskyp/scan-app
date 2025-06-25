@@ -209,9 +209,8 @@ body, html {
 }
 .code-toggle-btn {
   position: absolute;
-  top: 50%;
+  bottom: 6rem; /* rovnaká výška ako scan-btn */
   right: 1rem;
-  transform: translateY(-50%);
   font-size: 1.4rem;
   background: none;
   border: none;
@@ -219,4 +218,30 @@ body, html {
   z-index: 3;
   cursor: pointer;
   pointer-events: auto;
+}
+@media (max-height: 600px) {
+  .code-toggle-btn {
+    bottom: 4rem;
+  }
+}
+.start-overlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.start-button {
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  background: #00ffcc;
+  border: none;
+  border-radius: 0.5rem;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00ffcc80;
 }
