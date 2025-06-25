@@ -20,9 +20,9 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
         video: {
           facingMode: { ideal: 'environment' },
           width: { ideal: 1280 },
-          height: { ideal: 720 }
+          height: { ideal: 720 },
         },
-        audio: false
+        audio: false,
       });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
@@ -68,8 +68,14 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
         <>
           {/* ✅ Horný panel s ikonami */}
           <div className="top-bar">
-            <button onClick={onShowCode} className="top-bar-btn">🔐</button>
-            <button onClick={onOpenSettings} className="top-bar-btn">⚙️</button>
+            <button type="button" className="top-bar-btn" onClick={(e) => {
+              e.stopPropagation();
+              onShowCode();
+            }}>🔐</button>
+            <button type="button" className="top-bar-btn" onClick={(e) => {
+              e.stopPropagation();
+              onOpenSettings();
+            }}>⚙️</button>
           </div>
 
           {/* Skenovacie okno */}
