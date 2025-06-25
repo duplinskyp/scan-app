@@ -67,16 +67,11 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
         </div>
       ) : (
         <>
-          {/* ⚙️ Nastavenia */}
-          <button onClick={onOpenSettings} className="settings-btn"
-            style={{ zIndex: 100, pointerEvents: 'auto', position: 'absolute' }}>
-            ⚙️
-          </button>
-
-          {/* 🔐 Tajný kód */}
-          <button onClick={onShowCode} className="code-toggle-btn" style={{ zIndex: 10 }}>
-            🔐
-          </button>
+          {/* ✅ TOP BAR */}
+          <div className="top-bar">
+            <button onClick={onShowCode} className="top-bar-btn">🔐</button>
+            <button onClick={onOpenSettings} className="top-bar-btn">⚙️</button>
+          </div>
 
           {/* Skenovacie okno */}
           <div className="scan-frame">
@@ -100,7 +95,7 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
           </div>
 
           {/* Skenovacie tlačidlo */}
-          <button className="scan-btn" onClick={handleScanClick} style={{ zIndex: 10 }} />
+          <button className="scan-btn" onClick={handleScanClick} />
         </>
       )}
     </div>
