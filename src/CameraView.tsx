@@ -68,14 +68,16 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
         <>
           {/* ✅ Horný panel s ikonami */}
           <div className="top-bar">
-            <button type="button" className="top-bar-btn" onClick={(e) => {
-              e.stopPropagation();
-              onShowCode();
-            }}>🔐</button>
-            <button type="button" className="top-bar-btn" onClick={(e) => {
-              e.stopPropagation();
-              onOpenSettings();
-            }}>⚙️</button>
+            <div className="top-bar-inner">
+              <button type="button" className="top-bar-btn" onClick={(e) => {
+                e.stopPropagation();
+                onShowCode();
+              }}>🔐</button>
+              <button type="button" className="top-bar-btn" onClick={(e) => {
+                e.stopPropagation();
+                onOpenSettings();
+              }}>⚙️</button>
+            </div>
           </div>
 
           {/* Skenovacie okno */}
