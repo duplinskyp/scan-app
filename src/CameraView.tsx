@@ -36,7 +36,6 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
   useEffect(() => {
     if (isScanning) {
       setPhase('scanning');
-
       scanTimer.current = setTimeout(() => setPhase('done'), 4000);
       doneTimer.current = setTimeout(() => setPhase('idle'), 7000);
     }
@@ -67,7 +66,7 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
         </div>
       ) : (
         <>
-          {/* ✅ TOP BAR */}
+          {/* ✅ Horný panel s ikonami */}
           <div className="top-bar">
             <button onClick={onShowCode} className="top-bar-btn">🔐</button>
             <button onClick={onOpenSettings} className="top-bar-btn">⚙️</button>

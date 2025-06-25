@@ -228,7 +228,7 @@ body, html {
 
 /* === TOP BAR === */
 .top-bar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -237,9 +237,9 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1.2rem; /* ⬅ zväčšiť mierne padding */
-  z-index: 5;
-  box-sizing: border-box; /* ✅ zabezpečí, že padding sa počíta do šírky */
+  padding: 0 1.2rem;
+  z-index: 500;
+  box-sizing: border-box;
 }
 
 .top-bar-btn {
@@ -248,16 +248,14 @@ body, html {
   color: white;
   font-size: 1.6rem;
   cursor: pointer;
-  z-index: 10;
+  z-index: 501;
   pointer-events: auto;
-  padding: 0;
-  width: 2.5rem;  /* 🔒 fixná veľkosť */
+  width: 2.5rem;
   height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 
 .scan-face {
   width: 100%;
@@ -345,7 +343,7 @@ body, html {
   background: none;
   border: none;
   color: white;
-  z-index: 3;
+  z-index: 300;
   cursor: pointer;
   pointer-events: auto;
 }

@@ -8,24 +8,23 @@ const App: React.FC = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [triggerScan, setTriggerScan] = useState(false);
   const [codes, setCodes] = useState<string[]>([]);
-  const [codeIndex, setCodeIndex] = useState(0); // ✅ track aktuálneho indexu
+  const [codeIndex, setCodeIndex] = useState(0);
 
   const handleScan = () => {
     setTriggerScan(true);
-    setTimeout(() => setTriggerScan(false), 7000); // musí byť 7000!
+    setTimeout(() => setTriggerScan(false), 7000);
   };
-
 
   const handleCodeClose = () => {
     setShowCode(false);
-    setCodeIndex(prev => prev + 1); // ➕ inkrementuj po zavretí
+    setCodeIndex(prev => prev + 1);
   };
 
   return (
     <div className="app">
       <CameraView
         onShowCode={() => setShowCode(true)}
-        onOpenSettings={() => setShowSettings(true)} // ← TOTO MUSÍ BYŤ SPRÁVNE
+        onOpenSettings={() => setShowSettings(true)}
         onScan={handleScan}
         isScanning={triggerScan}
       />
@@ -40,7 +39,7 @@ const App: React.FC = () => {
         <Settings
           codes={codes}
           setCodes={setCodes}
-          onClose={() => setShowSettings(false)} // ← TOTO ZATVÁRA SETTINGS
+          onClose={() => setShowSettings(false)}
         />
       )}
     </div>
