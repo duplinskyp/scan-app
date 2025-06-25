@@ -12,25 +12,37 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
   const [phase, setPhase] = useState<'idle' | 'scanning' | 'done'>('idle');
 
   useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment',
-    width: { ideal: 1280 },
-    height: { ideal: 720 }} })
+    let isMounted = true;
+
+    navigator.mediaDevices
+      .getUserMedia({
+        video: {
+          facingMode: { ideal: 'environment' },
+          width: { ideal: 1280 },
+          height: { ideal: 720 }
+        },
+        audio: false
+      })
       .then(stream => {
-        if (videoRef.current) {
+        if (videoRef.current && isMounted) {
           videoRef.current.srcObject = stream;
         }
+      })
+      .catch(err => {
+        console.error('Camera error:', err);
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {
     if (isScanning) {
       setPhase('scanning');
-      
-      // Fáza skenovania 4 sekundy
-      const scanTimeout = setTimeout(() => setPhase('done'), 4000);
 
-      // Fáza fajky 3 sekundy po skenovaní
-      const doneTimeout = setTimeout(() => setPhase('idle'), 7000); // 4s + 3s
+      const scanTimeout = setTimeout(() => setPhase('done'), 4000); // 4s scanning
+      const doneTimeout = setTimeout(() => setPhase('idle'), 7000); // 3s done
 
       return () => {
         clearTimeout(scanTimeout);
@@ -47,21 +59,30 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
     <div className="camera-view">
       <video ref={videoRef} autoPlay playsInline muted className="video-bg" />
 
-      {/* ⚙️ settings */}
+      {/* ⚙️ Nastavenia */}
       <button onClick={onOpenSettings} className="settings-btn">⚙️</button>
 
-      {/* hlavné skenovacie okno */}
+      {/* 🔐 Zobrazenie tajného kódu */}
+      <button onClick={onShowCode} className="code-toggle-btn">🔐</button>
+
+      {/* Skenovacie okno */}
       <div className="scan-frame">
-        {/* skenovacia čiara len ak nie je fáza "done" */}
+        {/* Animovaná čiara iba ak NIE je fáza done */}
         {phase !== 'done' && <div className="scan-line" />}
 
+        {/* Zobrazenie face.png počas fázy skenovania */}
         {phase === 'scanning' && (
           <div className="scan-face-container">
-            <img src={`${import.meta.env.BASE_URL}face-white.png`} alt="Scanning face" className="scan-face" />
+            <img
+              src={`${import.meta.env.BASE_URL}face-white.png`}
+              alt="Scanning face"
+              className="scan-face"
+            />
             <div className="face-scan-mask" />
           </div>
         )}
 
+        {/* SVG fajka počas fázy done */}
         {phase === 'done' && (
           <svg className="checkmark-svg" viewBox="0 0 52 52">
             <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
@@ -70,11 +91,8 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
         )}
       </div>
 
-      {/* scan button */}
-      <button className="scan-btn" onClick={handleScanClick}></button>
-
-      {/* 🔐 zobrazenie kódu */}
-      <button onClick={onShowCode} className="code-toggle-btn">🔐</button>
+      {/* Skenovacie tlačidlo */}
+      <button className="scan-btn" onClick={handleScanClick} />
     </div>
   );
 };
