@@ -68,7 +68,8 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
       ) : (
         <>
           {/* ⚙️ Nastavenia */}
-          <button onClick={onOpenSettings} className="settings-btn" style={{ zIndex: 10 }}>
+          <button onClick={onOpenSettings} className="settings-btn"
+            style={{ zIndex: 100, pointerEvents: 'auto', position: 'absolute' }}>
             ⚙️
           </button>
 

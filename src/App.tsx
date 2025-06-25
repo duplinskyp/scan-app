@@ -10,10 +10,10 @@ const App: React.FC = () => {
   const [codes, setCodes] = useState<string[]>([]);
   const [codeIndex, setCodeIndex] = useState(0); // ✅ track aktuálneho indexu
 
-const handleScan = () => {
-  setTriggerScan(true);
-  setTimeout(() => setTriggerScan(false), 7000); // musí byť 7000!
-};
+  const handleScan = () => {
+    setTriggerScan(true);
+    setTimeout(() => setTriggerScan(false), 7000); // musí byť 7000!
+  };
 
 
   const handleCodeClose = () => {
@@ -25,7 +25,7 @@ const handleScan = () => {
     <div className="app">
       <CameraView
         onShowCode={() => setShowCode(true)}
-        onOpenSettings={() => setShowSettings(true)}
+        onOpenSettings={() => setShowSettings(true)} // ← TOTO MUSÍ BYŤ SPRÁVNE
         onScan={handleScan}
         isScanning={triggerScan}
       />
@@ -40,7 +40,7 @@ const handleScan = () => {
         <Settings
           codes={codes}
           setCodes={setCodes}
-          onClose={() => setShowSettings(false)}
+          onClose={() => setShowSettings(false)} // ← TOTO ZATVÁRA SETTINGS
         />
       )}
     </div>

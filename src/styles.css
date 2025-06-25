@@ -26,9 +26,8 @@ body, html {
   object-fit: cover;
   z-index: 0;
   filter: brightness(0.5);
-  pointer-events: none;
+  pointer-events: none; /* TOTO JE DÔLEŽITÉ! */
 }
-
 /* CENTROVANÉ skenovacie okno */
 .scan-frame {
   position: absolute;
@@ -94,7 +93,7 @@ body, html {
   background: none;
   border: none;
   color: white;
-  z-index: 20;
+  z-index: 100;
   cursor: pointer;
   pointer-events: auto;
 }
