@@ -12,7 +12,9 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
   const [phase, setPhase] = useState<'idle' | 'scanning' | 'done'>('idle');
 
   useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment',
+    width: { ideal: 1280 },
+    height: { ideal: 720 }} })
       .then(stream => {
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
