@@ -97,17 +97,16 @@ body, html {
   cursor: pointer;
   pointer-events: auto;
 }
-
 .settings-screen {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.92);
-  z-index: 9999; /* 💥 vyššie ako všetko ostatné */
+  z-index: 9999;           /* ← zvýšený z-index */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  pointer-events: auto;
+  pointer-events: auto;    /* ← istota, že sa dá kliknúť */
 }
 /* OVERLAY na zobrazenie tajného kódu */
 .code-overlay {
