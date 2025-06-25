@@ -364,13 +364,14 @@ html {
 }
 
 .scan-face {
-  width: 100%;
-  max-height: 100%;
-  animation: faceReveal 3s ease-out forwards;
-  opacity: 0;
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  opacity: 1;
   filter: drop-shadow(0 0 20px #00ffccaa);
+  object-fit: contain;
 }
-
 .close-btn {
   width: 100%;
   padding: 1rem;
