@@ -306,12 +306,13 @@ html {
 
 .code-input {
   display: flex;
-  flex-wrap: nowrap;
   gap: 0.6rem;
   align-items: center;
-  overflow: hidden;
   width: 100%;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
+
 
 .code-input input {
   flex: 1;
@@ -321,6 +322,7 @@ html {
   border: 1px solid #00ffcc33;
   background: #000;
   color: white;
+  min-width: 0; /* dôležité na zabránenie overflowu */
 }
 
 .top-bar-inner {
@@ -336,19 +338,20 @@ html {
 }
 
 .code-input button {
-  padding: 0.8rem 0.9rem;
-  /* menšie */
-  font-size: 1.2rem;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.4rem;
   background: #00ffcc;
   border: none;
   border-radius: 6px;
   color: black;
   font-weight: bold;
   cursor: pointer;
-  flex-shrink: 0;
-  max-width: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .close-btn {
   width: 100%;
   padding: 1rem;
