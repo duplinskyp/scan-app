@@ -55,7 +55,7 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
 
         {phase === 'scanning' && (
           <div className="scan-face-container">
-            <img src="/face-white.png" alt="Scanning face" className="scan-face" />
+            <img src={`${import.meta.env.BASE_URL}face.png`} alt="Scanning face" className="scan-face" />
             <div className="face-scan-mask" />
           </div>
         )}

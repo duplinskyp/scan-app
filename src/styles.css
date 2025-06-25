@@ -218,84 +218,14 @@ body, html {
 @keyframes strokeCheck {
   to { stroke-dashoffset: 0; }
 }
-/* === SETTINGS SCREEN === */
-.settings-screen {
+.code-toggle-btn {
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.92);
-  z-index: 200;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.settings-box {
-  background: #111;
-  border: 1px solid #00ffcc33;
-  border-radius: 1rem;
-  padding: 2rem;
-  color: #fff;
-  max-width: 90%;
-  width: 400px;
-  box-shadow: 0 0 20px #00ffcc44;
-}
-
-.settings-box h2 {
-  margin-top: 0;
-  text-align: center;
-}
-
-.settings-box label {
-  display: block;
-  margin-bottom: 1rem;
-}
-
-.settings-box input[type="number"],
-.settings-box input[type="text"] {
-  width: 100%;
-  padding: 0.4rem;
-  margin-top: 0.3rem;
-  margin-bottom: 1rem;
-  background: #000;
-  border: 1px solid #00ffcc33;
-  color: #fff;
-}
-
-.codes-list {
-  margin-bottom: 1rem;
-}
-
-.code-item {
-  display: flex;
-  justify-content: space-between;
-  background: #222;
-  padding: 0.3rem 0.6rem;
-  margin-bottom: 0.5rem;
-  border-radius: 4px;
-}
-
-.code-input {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.code-input input {
-  flex: 1;
-}
-
-.code-input button {
-  padding: 0 0.6rem;
-}
-
-.close-btn {
-  margin-top: 1.5rem;
-  width: 100%;
-  padding: 0.6rem;
-  background: #00ffcc;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1.6rem;
+  background: none;
   border: none;
-  color: black;
-  font-weight: bold;
-  border-radius: 0.4rem;
+  color: white;
+  z-index: 10;
   cursor: pointer;
 }
