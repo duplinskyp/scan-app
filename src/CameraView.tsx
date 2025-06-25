@@ -11,6 +11,8 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
   const videoRef = useRef<HTMLVideoElement>(null);
   const [phase, setPhase] = useState<'idle' | 'scanning' | 'done'>('idle');
   const [cameraStarted, setCameraStarted] = useState(false);
+  const scanTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const doneTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const startCamera = async () => {
     try {
@@ -35,14 +37,14 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
     if (isScanning) {
       setPhase('scanning');
 
-      const scanTimeout = setTimeout(() => setPhase('done'), 4000);
-      const doneTimeout = setTimeout(() => setPhase('idle'), 7000);
-
-      return () => {
-        clearTimeout(scanTimeout);
-        clearTimeout(doneTimeout);
-      };
+      scanTimer.current = setTimeout(() => setPhase('done'), 4000);
+      doneTimer.current = setTimeout(() => setPhase('idle'), 7000);
     }
+
+    return () => {
+      if (scanTimer.current) clearTimeout(scanTimer.current);
+      if (doneTimer.current) clearTimeout(doneTimer.current);
+    };
   }, [isScanning]);
 
   const handleStartClick = () => {
@@ -66,10 +68,14 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
       ) : (
         <>
           {/* ⚙️ Nastavenia */}
-          <button onClick={onOpenSettings} className="settings-btn">⚙️</button>
+          <button onClick={onOpenSettings} className="settings-btn" style={{ zIndex: 10 }}>
+            ⚙️
+          </button>
 
           {/* 🔐 Tajný kód */}
-          <button onClick={onShowCode} className="code-toggle-btn">🔐</button>
+          <button onClick={onShowCode} className="code-toggle-btn" style={{ zIndex: 10 }}>
+            🔐
+          </button>
 
           {/* Skenovacie okno */}
           <div className="scan-frame">
@@ -92,8 +98,8 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
             )}
           </div>
 
-          {/* Scan tlačidlo */}
-          <button className="scan-btn" onClick={handleScanClick} />
+          {/* Skenovacie tlačidlo */}
+          <button className="scan-btn" onClick={handleScanClick} style={{ zIndex: 10 }} />
         </>
       )}
     </div>

@@ -94,7 +94,7 @@ body, html {
   background: none;
   border: none;
   color: white;
-  z-index: 5; /* Uistime sa, že je nad všetkým */
+  z-index: 20;
   cursor: pointer;
   pointer-events: auto;
 }
