@@ -352,6 +352,28 @@ html {
   align-items: center;
   justify-content: center;
 }
+
+.scan-face-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.scan-face {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  animation: faceReveal 3s ease-out forwards;
+  opacity: 0;
+  filter: drop-shadow(0 0 20px #00ffccaa);
+  object-fit: contain;
+}
+
 .close-btn {
   width: 100%;
   padding: 1rem;
