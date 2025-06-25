@@ -105,10 +105,11 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
-  overflow-y: auto; /* umožní scroll */
+  padding: 2rem;
+  overflow-y: auto;
+  overflow-x: hidden; /* ← Pridaj toto */
+  box-sizing: border-box;
 }
-
 .settings-box {
   background: #111;
   border: 1px solid #00ffcc33;
@@ -119,7 +120,8 @@ body, html {
   max-width: 480px; /* širšie pre mobily */
   box-shadow: 0 0 20px #00ffcc44;
   overflow-y: auto;
-  box-sizing: border-box;
+  box-sizing: border-box;   /* ← stačí raz */
+  overflow-x: hidden;       /* ← pridaj len raz */
 }
 
 .settings-box h2 {
