@@ -7,7 +7,11 @@ const App: React.FC = () => {
   const [showCode, setShowCode] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [triggerScan, setTriggerScan] = useState(false);
-  const [codes, setCodes] = useState<string[]>([]);
+const [codes, setCodes] = useState<string[]>([
+  "Gombička",
+  "Dvierka",
+  "Mama"
+]);
   const [codeIndex, setCodeIndex] = useState(0);
 
   const handleScan = () => {
