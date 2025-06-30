@@ -55,6 +55,22 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
     onScan();
   };
 
+  const renderResultIcon = () => {
+    if (phase !== 'done') return null;
+
+    return showErrorIcon ? (
+      <svg className="checkmark-svg" key="x-icon" viewBox="0 0 52 52">
+        <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+        <path d="M16 16 L36 36 M36 16 L16 36" stroke="#ff4444" strokeWidth="5" strokeLinecap="round" />
+      </svg>
+    ) : (
+      <svg className="checkmark-svg" key="check-icon" viewBox="0 0 52 52">
+        <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+        <path className="checkmark-check" fill="none" d="M14 27l7 7 17-17" />
+      </svg>
+    );
+  };
+
   return (
     <div className="camera-view">
       <video ref={videoRef} autoPlay playsInline muted className="video-bg" />
@@ -70,26 +86,14 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
           {/* ✅ Horný panel s ikonami */}
           <div className="top-bar">
             <div className="top-bar-inner">
-              <button
-                type="button"
-                className="top-bar-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onShowCode();
-                }}
-              >
-                🔐
-              </button>
-              <button
-                type="button"
-                className="top-bar-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onOpenSettings();
-                }}
-              >
-                ⚙️
-              </button>
+              <button type="button" className="top-bar-btn" onClick={(e) => {
+                e.stopPropagation();
+                onShowCode();
+              }}>🔐</button>
+              <button type="button" className="top-bar-btn" onClick={(e) => {
+                e.stopPropagation();
+                onOpenSettings();
+              }}>⚙️</button>
             </div>
           </div>
 
@@ -106,19 +110,7 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
                 <div className="face-scan-mask" />
               </div>
             )}
-            {phase === 'done' && (
-              showErrorIcon ? (
-                <svg className="checkmark-svg" viewBox="0 0 52 52">
-                  <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
-                  <path d="M16 16 L36 36 M36 16 L16 36" stroke="#ff4444" strokeWidth="5" strokeLinecap="round" />
-                </svg>
-              ) : (
-                <svg className="checkmark-svg" viewBox="0 0 52 52">
-                  <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
-                  <path className="checkmark-check" fill="none" d="M14 27l7 7 17-17" />
-                </svg>
-              )
-            )}
+            {renderResultIcon()}
           </div>
 
           {/* Prepínač medzi ✅ / ❌ */}
@@ -128,7 +120,7 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
               e.stopPropagation();
               setShowErrorIcon(prev => !prev);
             }}
-            title="Prepni medzi ✅ / ❌"
+            title="Prepni výsledok"
           >
             ⬤
           </button>
