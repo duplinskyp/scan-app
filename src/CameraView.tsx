@@ -11,7 +11,7 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
   const videoRef = useRef<HTMLVideoElement>(null);
   const [phase, setPhase] = useState<'idle' | 'scanning' | 'done'>('idle');
   const [cameraStarted, setCameraStarted] = useState(false);
-  const [showX, setShowX] = useState(false); // ❗️ Nový toggle stav
+  const [showErrorIcon, setShowErrorIcon] = useState(false);
   const scanTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const doneTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -55,10 +55,6 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
     onScan();
   };
 
-  const toggleShowX = () => {
-    setShowX(prev => !prev);
-  };
-
   return (
     <div className="camera-view">
       <video ref={videoRef} autoPlay playsInline muted className="video-bg" />
@@ -74,14 +70,26 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
           {/* ✅ Horný panel s ikonami */}
           <div className="top-bar">
             <div className="top-bar-inner">
-              <button type="button" className="top-bar-btn" onClick={(e) => {
-                e.stopPropagation();
-                onShowCode();
-              }}>🔐</button>
-              <button type="button" className="top-bar-btn" onClick={(e) => {
-                e.stopPropagation();
-                onOpenSettings();
-              }}>⚙️</button>
+              <button
+                type="button"
+                className="top-bar-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onShowCode();
+                }}
+              >
+                🔐
+              </button>
+              <button
+                type="button"
+                className="top-bar-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpenSettings();
+                }}
+              >
+                ⚙️
+              </button>
             </div>
           </div>
 
@@ -98,31 +106,35 @@ const CameraView: React.FC<Props> = ({ onShowCode, onOpenSettings, onScan, isSca
                 <div className="face-scan-mask" />
               </div>
             )}
-            {phase === 'done' && !showX && (
-              <svg className="checkmark-svg" viewBox="0 0 52 52">
-                <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
-                <path className="checkmark-check" fill="none" d="M14 27l7 7 17-17" />
-              </svg>
-            )}
-            {phase === 'done' && showX && (
-              <svg className="checkmark-svg" viewBox="0 0 52 52">
-                <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
-                <path className="checkmark-check" fill="none" stroke="#ff4444" strokeWidth="5" d="M16 16 L36 36 M36 16 L16 36" />
-              </svg>
+            {phase === 'done' && (
+              showErrorIcon ? (
+                <svg className="checkmark-svg" viewBox="0 0 52 52">
+                  <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+                  <path d="M16 16 L36 36 M36 16 L16 36" stroke="#ff4444" strokeWidth="5" strokeLinecap="round" />
+                </svg>
+              ) : (
+                <svg className="checkmark-svg" viewBox="0 0 52 52">
+                  <circle className="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+                  <path className="checkmark-check" fill="none" d="M14 27l7 7 17-17" />
+                </svg>
+              )
             )}
           </div>
 
-          {/* Skenovacie tlačidlo */}
-          <button className="scan-btn" onClick={handleScanClick} />
-
-          {/* ❗️ Prepínač zobrazenia checkmark vs. X */}
+          {/* Prepínač medzi ✅ / ❌ */}
           <button
-            className="toggle-x-btn"
-            onClick={toggleShowX}
-            title="Prepínač výsledku"
+            className={`toggle-x-btn ${showErrorIcon ? 'active' : ''}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowErrorIcon(prev => !prev);
+            }}
+            title="Prepni medzi ✅ / ❌"
           >
             ⬤
           </button>
+
+          {/* Skenovacie tlačidlo */}
+          <button className="scan-btn" onClick={handleScanClick} />
         </>
       )}
     </div>

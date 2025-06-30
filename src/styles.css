@@ -411,3 +411,32 @@ html {
   cursor: pointer;
   font-size: 1.2rem;
 }
+.toggle-x-btn {
+  position: absolute;
+  bottom: 6rem;
+  right: 1rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  font-size: 1.4rem;
+  background: #222;
+  color: #aaa;
+  border: 2px solid #00ffcc44;
+  border-radius: 50%;
+  z-index: 4;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transition: all 0.2s ease-in-out;
+}
+
+.toggle-x-btn:hover {
+  opacity: 1;
+  border-color: #00ffccaa;
+}
+
+.toggle-x-btn.active {
+  color: #ff4444;
+  border-color: #ff444488;
+}
