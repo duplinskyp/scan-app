@@ -9,8 +9,8 @@ const App: React.FC = () => {
   const [triggerScan, setTriggerScan] = useState(false);
 const [codes, setCodes] = useState<string[]>([
   "Gombička",
-  "Dvierka",
-  "Mama"
+  "Mama",
+  "Dvierka"
 ]);
   const [codeIndex, setCodeIndex] = useState(0);
 
